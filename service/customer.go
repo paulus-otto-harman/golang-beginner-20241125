@@ -6,19 +6,24 @@ import (
 	"project/repository"
 )
 
-type CustomerService struct {
+type CustomerServiceInterface interface {
+	Register(customer *domain.Customer) error
+	Profile(authToken string) (*domain.Customer, error)
+}
+
+type customerService struct {
 	Customer *repository.Customer
 	Logger   *zap.Logger
 }
 
-func InitCustomerService(repo repository.Repository, log *zap.Logger) *CustomerService {
-	return &CustomerService{Customer: repo.Customer, Logger: log}
+func InitCustomerService(repo repository.Repository, log *zap.Logger) CustomerServiceInterface {
+	return &customerService{Customer: repo.Customer, Logger: log}
 }
 
-func (repo *CustomerService) Register(customer *domain.Customer) error {
+func (repo *customerService) Register(customer *domain.Customer) error {
 	return repo.Customer.Register(customer)
 }
 
-func (repo *CustomerService) Profile(authToken string) (*domain.Customer, error) {
+func (repo *customerService) Profile(authToken string) (*domain.Customer, error) {
 	return repo.Customer.Profile(authToken)
 }

@@ -12,7 +12,7 @@ import (
 )
 
 type CartHandler struct {
-	CartService *service.CartService
+	CartService service.CartServiceInterface
 	Logger      *zap.Logger
 	Validator   util.Validation
 }
@@ -30,7 +30,7 @@ func (handle CartHandler) Create(w http.ResponseWriter, r *http.Request) {
 	cartItem := domain.CartItem{}
 
 	if err := json.NewDecoder(r.Body).Decode(&cartItem); err != nil {
-		handle.Logger.Error("invalid JSON input", zap.Error(err))
+		handle.Logger.Error("invalid json input", zap.Error(err))
 		util.Response(w).Json(http.StatusUnprocessableEntity, "invalid input")
 		return
 	}

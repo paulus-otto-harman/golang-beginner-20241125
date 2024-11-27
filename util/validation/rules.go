@@ -11,10 +11,10 @@ type Validation struct {
 }
 
 type Rule struct {
-	ValidationService *service.ValidationService
+	ValidationService service.ValidationServiceInterface
 }
 
-func Init(validationService *service.ValidationService) Validation {
+func Init(validationService service.ValidationServiceInterface) Validation {
 	return Validation{Rule{ValidationService: validationService}}
 }
 

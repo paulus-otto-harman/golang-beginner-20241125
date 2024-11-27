@@ -21,7 +21,12 @@ func InitAuthHandler(service service.Service, log *zap.Logger, validator util.Va
 
 func (handle *AuthHandler) Login(w http.ResponseWriter, r *http.Request) {
 	user := domain.User{}
-	json.NewDecoder(r.Body).Decode(&user)
+	err := json.NewDecoder(r.Body).Decode(&user)
+
+	if err != nil {
+		util.Response(w).Json(http.StatusBadRequest, "invalid request body")
+		return
+	}
 
 	if err := handle.Validator.ValidateStruct(user); err != nil {
 		util.Response(w).ValidationFail(err)

@@ -28,16 +28,12 @@ func (response ResponseWriter) Json(statusCode int, message string, data ...inte
 		r.Data = data[0]
 	}
 
+	response.Writer.WriteHeader(statusCode)
+
 	json.NewEncoder(response.Writer).Encode(r)
 }
 
 func (response ResponseWriter) ValidationFail(data interface{}) {
 	message := "invalid input"
-	r := domain.Response{
-		StatusCode: http.StatusUnprocessableEntity,
-		Message:    &message,
-		Data:       data,
-	}
-
-	json.NewEncoder(response.Writer).Encode(r)
+	response.Json(http.StatusUnprocessableEntity, message, data)
 }

@@ -11,14 +11,14 @@ type Service struct {
 	Auth           AuthServiceInterface
 	Banner         *BannerService
 	Bestseller     *BestsellerService
-	Cart           *CartService
+	Cart           CartServiceInterface
 	Category       *CategoryService
 	Order          *OrderService
-	Customer       *CustomerService
+	Customer       CustomerServiceInterface
 	Product        *ProductService
 	Recommendation *RecommendationService
 	Session        *SessionService
-	Validation     *ValidationService
+	Validation     ValidationServiceInterface
 	Wishlist       *WishlistService
 	Weekly         *WeeklyService
 }

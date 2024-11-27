@@ -1,1 +1,2 @@
-{"L":"INFO","T":"2024-11-25T11:35:03.805+0700","M":"Server started on port 8080"}
+{"L":"INFO","T":"2024-11-26T10:20:43.960+0700","M":"Server started on port 8080"}
+{"L":"INFO","T":"2024-11-26T10:20:45.615+0700","M":"http request","method":"POST","url":"/api/login","duration":"231.208µs"}

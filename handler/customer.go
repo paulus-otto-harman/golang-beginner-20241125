@@ -10,7 +10,7 @@ import (
 )
 
 type CustomerHandler struct {
-	CustomerService *service.CustomerService
+	CustomerService service.CustomerServiceInterface
 	Logger          *zap.Logger
 	Validator       util.Validation
 }

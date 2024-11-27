@@ -14,16 +14,16 @@ type AddressServiceInterface interface {
 	Delete(addressId int, authToken string) error
 }
 
-type AddressService struct {
+type addressService struct {
 	Address *repository.Address
 	Logger  *zap.Logger
 }
 
 func InitAddressService(repo repository.Repository, log *zap.Logger) AddressServiceInterface {
-	return &AddressService{Address: repo.Address, Logger: log}
+	return &addressService{Address: repo.Address, Logger: log}
 }
 
-func (repo *AddressService) Index(authToken string) ([]domain.Address, error) {
+func (repo *addressService) Index(authToken string) ([]domain.Address, error) {
 	addresses, err := repo.Address.Index(authToken)
 
 	if err != nil {
@@ -34,18 +34,18 @@ func (repo *AddressService) Index(authToken string) ([]domain.Address, error) {
 	return addresses, nil
 }
 
-func (repo *AddressService) Create(address *domain.Address, authToken string) error {
+func (repo *addressService) Create(address *domain.Address, authToken string) error {
 	return repo.Address.Store(address, authToken)
 }
 
-func (repo *AddressService) Update(address *domain.Address, authToken string) error {
+func (repo *addressService) Update(address *domain.Address, authToken string) error {
 	return repo.Address.Update(address, authToken)
 }
 
-func (repo *AddressService) SetDefault(addressId int, authToken string) error {
+func (repo *addressService) SetDefault(addressId int, authToken string) error {
 	return repo.Address.SetDefault(addressId, authToken)
 }
 
-func (repo *AddressService) Delete(addressId int, authToken string) error {
+func (repo *addressService) Delete(addressId int, authToken string) error {
 	return repo.Address.Destroy(addressId, authToken)
 }
